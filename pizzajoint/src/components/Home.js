@@ -4,9 +4,24 @@ import { motion } from "framer-motion";
 
 const buttonVariants = {
   hover: {
-    scale: [1, 1.1, 1, 1.1, 1, 1.1, 1],
+    scale: 1.1,
     textShadow: "0px 0px 8px rgb(255,255,255)",
     boxShadow: "0px 0px 8px rgb(255,255,255)",
+    transition: {
+      yoyo: Infinity,
+      duration: 0.3,
+    },
+  },
+};
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { type: "spring", duration: 1.5, delay: 1.5 },
+  },
+  exit: {
+    x: "-100vw",
+    transition: { ease: "easeInOut" },
   },
 };
 
@@ -14,9 +29,10 @@ const Home = () => {
   return (
     <motion.div
       className="home container"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 1.5, duration: 1.5 }}
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
     >
       <h2 animate={{ fontSize: 50, color: "#ff2994", x: 100, y: -100 }}>
         Welcome to Pizza Joint
